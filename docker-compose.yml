@@ -10,6 +10,7 @@ services:
       - GITEA__database__USER=gitea
       - GITEA__database__PASSWD=${PASSWORD}
       - GITEA__service__DISABLE_REGISTRATION=true
+      - GITEA__server__ROOT_URL=https://git.rwillia.ms/
     restart: always
     volumes:
       - git_data:/data

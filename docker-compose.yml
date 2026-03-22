@@ -1,6 +1,14 @@
 services:
   gitea:
     image: gitea/gitea:latest
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - GITEA__database__DB_TYPE=postgres
+      - GITEA__database__HOST=db:5432
+      - GITEA__database__NAME=gitea
+      - GITEA__database__USER=gitea
+      - GITEA__database__PASSWD=${PASSWORD}
     restart: always
     volumes:
       - git_data:/data
@@ -8,6 +16,10 @@ services:
       - 3232:3000
   db:
     image: postgres:alpine
+    environment:
+      - POSTGRES_USER=gitea
+      - POSTGRES_PASSWORD=${PASSWORD}
+      - POSTGRES_DB=gitea
     restart: always
     volumes:
       - db_data:/var/lib/postgresql/data

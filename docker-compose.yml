@@ -30,6 +30,11 @@ services:
       - db_data:/var/lib/postgresql/data
     expose:
       - 5432
+  convert:
+    image: ghcr.io/${GITHUB_REPOSITORY:-p2r3/convert}:${CONVERT_IMAGE_TAG:-latest}
+    ports:
+      - "3231:80"
+    restart: unless-stopped
 volumes:
   db_data:
   git_data:

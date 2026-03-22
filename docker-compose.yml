@@ -2,18 +2,20 @@ services:
   gitea:
     image: gitea/gitea:latest
     environment:
-      - USER_UID=1000
-      - USER_GID=1000
+      - USER_UID=1001
+      - USER_GID=1001
       - GITEA__database__DB_TYPE=postgres
       - GITEA__database__HOST=db:5432
       - GITEA__database__NAME=gitea
       - GITEA__database__USER=gitea
       - GITEA__database__PASSWD=${PASSWORD}
+      - GITEA__service__DISABLE_REGISTRATION=true
     restart: always
     volumes:
       - git_data:/data
     ports:
       - 3232:3000
+      - 3222:22
   db:
     image: postgres:alpine
     environment:
